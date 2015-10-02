@@ -37,18 +37,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         controller: 'AppCtrl'
     })
 
-    .state('app.activity', {
-        url: '/activity',
+    .state('app.tasks', {
+        url: '/tasks/:column',
         views: {
             'menuContent': {
-                templateUrl: 'templates/activity.html',
-                controller: 'ActivityCtrl'
+                templateUrl: 'templates/tasks.html',
+                controller: 'TasksCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-paper-airplane"></i></button>',
+                template: '<button id="fab-tasks" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-paper-airplane"></i></button>',
                 controller: function ($timeout) {
                     $timeout(function () {
-                        document.getElementById('fab-activity').classList.toggle('on');
+                        document.getElementById('fab-tasks').classList.toggle('on');
                     }, 200);
                 }
             }
@@ -112,11 +112,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                 controller: 'BacklogCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-backlog" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($timeout) {
-                    /*$timeout(function () {
-                        document.getElementById('fab-backlog').classList.toggle('on');
-                    }, 800);*/
+                template: '<button id="fab-backlog" ng-click="createNewTask()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                controller: function ($scope) {
+                   $scope.createNewTask = function() {
+                      console.log("here");
+                   };
                 }
             }
         }

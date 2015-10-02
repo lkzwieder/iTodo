@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="tabs tabs-dark tabs-icon-top static">
-            <a ui-sref="app.activity" class="tab-item">
+            <a ui-sref="app.tasks({column: 'todo'})" class="tab-item">
                 <i class="icon ion-arrow-graph-up-right"></i> To Do
             </a>
             <a ui-sref="app.friends" class="tab-item">
@@ -20,7 +20,7 @@
         </div>
         <h4 class="content padding double-padding-x">Backlog</h4>
         <div class="list animate-fade-slide-in-right" ng-repeat="task in tasks">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+            <a ui-sref="app.task" class="item item-avatar item-icon-right">
                 <img src="img/backlog.png">
                 <h2>{{task.title}}</h2>
                 <p>{{task.content}}</p>
