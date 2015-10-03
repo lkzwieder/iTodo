@@ -37,18 +37,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         controller: 'AppCtrl'
     })
 
-    .state('app.tasks', {
-        url: '/tasks/:column',
+    .state('app.column', {
+        url: '/column/:column',
         views: {
             'menuContent': {
-                templateUrl: 'templates/tasks.html',
-                controller: 'TasksCtrl'
+                templateUrl: 'templates/column.html',
+                controller: 'ColumnCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-tasks" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-paper-airplane"></i></button>',
+               template: '<button id="fab-backlog" ng-click="createNewTask()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
                 controller: function ($timeout) {
                     $timeout(function () {
-                        document.getElementById('fab-tasks').classList.toggle('on');
+                        document.getElementById('fab-backlog').classList.toggle('on');
                     }, 200);
                 }
             }

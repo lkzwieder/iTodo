@@ -116,14 +116,11 @@ angular.module('starter.controllers', [])
 
 .controller('BacklogCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService) {
     // Set Header
-    $scope.tasks = DataService.getBacklog();
+    $scope.tasks = DataService.getColumn('backlog');
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
-
 
     // Set Motion
     $timeout(function() {
@@ -142,12 +139,15 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('TasksCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ColumnCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService) {
     $scope.column = $stateParams.column;
+    $scope.tasks = DataService.getColumn($stateParams.column);
+    $scope.image = 'img/bug.png';
+
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('right');
 
     $timeout(function() {
