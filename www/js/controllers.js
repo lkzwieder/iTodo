@@ -102,8 +102,7 @@ angular.module('starter.controllers', [])
 
 .controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
    $scope.$parent.showHeader();
-   $scope.$parent.clearFabs();
-   $scope.$parent.setHeaderFab('left');
+   //$scope.$parent.setHeaderFab('left');
 
    ionicMaterialMotion.fadeSlideInRight();
    ionicMaterialInk.displayEffect();

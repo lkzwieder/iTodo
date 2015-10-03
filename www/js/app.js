@@ -71,9 +71,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             'menuContent': {
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
-            },
-            'fabContent': {
-                template: ''
             }
         }
     })
