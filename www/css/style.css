@@ -81,3 +81,7 @@ p {
 .nav-bar-block {
     height: 45px;
 }
+
+#newTask {
+    top: 65px;
+}

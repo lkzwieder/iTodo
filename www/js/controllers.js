@@ -3,19 +3,23 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
-    // Form data for the login modal
-    $scope.loginData = {};
-    $scope.isExpanded = false;
-    $scope.hasHeaderFabLeft = false;
-    $scope.hasHeaderFabRight = false;
+.controller('AppCtrl', function($scope, $state, $ionicModal, $ionicPopover, $timeout) {
+   // Form data for the login modal
+   $scope.loginData = {};
+   $scope.isExpanded = false;
+   $scope.hasHeaderFabLeft = false;
+   $scope.hasHeaderFabRight = false;
 
-    var navIcons = document.getElementsByClassName('ion-navicon');
-    for (var i = 0; i < navIcons.length; i++) {
-        navIcons.addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
-    }
+   var navIcons = document.getElementsByClassName('ion-navicon');
+   for (var i = 0; i < navIcons.length; i++) {
+     navIcons.addEventListener('click', function() {
+         this.classList.toggle('active');
+     });
+   }
+
+   $scope.createNewTask = function() {
+      $state.go('app.new');
+   };
 
     ////////////////////////////////////////
     // Layout Methods
@@ -66,7 +70,6 @@ angular.module('starter.controllers', [])
                 content[i].classList.toggle('has-header');
             }
         }
-
     };
 
     $scope.hideHeader = function() {
@@ -95,27 +98,16 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
+.controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+   $scope.$parent.showHeader();
+   $scope.$parent.clearFabs();
+   $scope.$parent.setHeaderFab('left');
 
-    // Delay expansion
-    $timeout(function() {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
-
-    // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
+   ionicMaterialMotion.fadeSlideInRight();
+   ionicMaterialInk.displayEffect();
 })
 
 .controller('BacklogCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService) {
-    // Set Header
     $scope.tasks = DataService.getColumn('backlog');
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();

@@ -55,20 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.friends', {
-        url: '/friends',
+    .state('app.new', {
+        url: '/new',
         views: {
             'menuContent': {
-                templateUrl: 'templates/friends.html',
-                controller: 'FriendsCtrl'
-            },
-            'fabContent': {
-                template: '<button id="fab-friends" class="button button-fab button-fab-top-left expanded button-energized-900 spin"><i class="icon ion-chatbubbles"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-friends').classList.toggle('on');
-                    }, 900);
-                }
+                templateUrl: 'templates/new.html',
+                controller: 'NewCtrl'
             }
         }
     })
@@ -113,10 +105,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             },
             'fabContent': {
                 template: '<button id="fab-backlog" ng-click="createNewTask()" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
-                controller: function ($scope) {
-                   $scope.createNewTask = function() {
-                      console.log("here");
-                   };
+                controller: function ($timeout) {
+                   $timeout(function () {
+                      document.getElementById('fab-backlog').classList.toggle('on');
+                   }, 600);
                 }
             }
         }
