@@ -70,6 +70,18 @@ angular.module('starter.services', [])
             asigned: "Jonathan"
          }]
       };
+
+      var _maxId = false;
+      var _getMaxId = function() {
+         var maxId = 0;
+         angular.forEach(_data, function(column) {
+            var cLen = column.length;
+            for(var i = cLen; i--;) {
+               if(column[i].id > maxId) maxId = column[i].id;
+            }
+         });
+         return _getMaxId();
+      };
       return {
          getColumn: function(column) {
             return _data[column];
@@ -80,20 +92,10 @@ angular.module('starter.services', [])
          getTasksByTab: function(tab) {
             return this.all()[tab];
          },
-         getTaskById: function(taskId, tab) {
-            tab = tab || "todo";
-            var tabArr = this.getTasksByTab(tab);
-            var tabArrLen = tabArr.length;
-            for(var i = tabArrLen; i--;) {
-               if(tabArr[i].id === parseInt(taskId)) {
-                  return tabArr[i];
-               }
-            }
-            return null;
-         },
-         addTask: function(data, tab) {
-            tab = tab || "todo";
-            this.getTasksByTab(tab).push(data);
+         newTask: function(column, data) {
+            if(_maxId) _maxId = _getMaxId();
+            data.id = _maxId++;
+            _data[column].push(data);
          },
          updateTask: function(data, tab) {
             tab = tab || "todo"; //TODO if tab is undefined, iterate over object to find task id
