@@ -71,16 +71,15 @@ angular.module('starter.services', [])
          }]
       };
 
-      var _maxId = false;
+      var _maxId = 0;
       var _getMaxId = function() {
-         var maxId = 0;
          angular.forEach(_data, function(column) {
             var cLen = column.length;
             for(var i = cLen; i--;) {
-               if(column[i].id > maxId) maxId = column[i].id;
+               if(column[i].id > _maxId) _maxId = column[i].id;
             }
          });
-         return _getMaxId();
+         return _maxId;
       };
       return {
          getColumn: function(column) {

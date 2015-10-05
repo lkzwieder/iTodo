@@ -81,3 +81,7 @@ p {
 .nav-bar-block {
     height: 45px;
 }
+
+.button {
+    z-index: 9999 !important;
+}
