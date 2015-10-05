@@ -2,30 +2,30 @@
     <ion-content>
         <div class="list card">
             <div class="item item-avatar">
-                <img src="{{title.image}}">
+                <img src="{{task.image}}">
                 <h2>{{task.title}}</h2>
                 <p>{{task.deadline}}</p>
             </div>
             <div class="item item-body">
-                <img class="full-image" src="delorean.jpg">
+                <i class="icon ion-bug"></i>
                 <p>{{task.content}}</p>
                 <p>
-                    <a href="#" class="subdued">1 Like</a>
+                    <a href="#" class="subdued">1 Watching</a>
                     <a href="#" class="subdued">5 Comments</a>
                 </p>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item" href="#">
-                    <i class="icon ion-thumbsup"></i>
-                    Like
+                <a class="tab-item" ng-click="updateTask(task.id, column)">
+                    <i class="icon ion-android-settings"></i>
+                    Update
                 </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-chatbox"></i>
-                    Comment
+                <a class="tab-item" ng-click="deleteTask(task.id, column)">
+                    <i class="icon ion-trash-a"></i>
+                    Delete
                 </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ion-share"></i>
-                    Share
+                <a class="tab-item" ng-click="watchTask(task.id, column)">
+                    <i class="icon ion-eye"></i>
+                    Watch
                 </a>
             </div>
         </div>

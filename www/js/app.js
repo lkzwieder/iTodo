@@ -65,6 +65,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
           }
       })
 
+      .state('app.update', {
+          url: '/update/:taskId/:column',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/new.html',
+                  controller: 'UpdateCtrl'
+              }
+          }
+      })
+
     .state('app.task', {
       url: '/task/:taskId/:column',
       views: {

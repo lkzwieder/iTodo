@@ -100,31 +100,46 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
-   $scope.$parent.showHeader();
-   $scope.$parent.setHeaderFab('left');
-   ionicMaterialInk.displayEffect();
+  .controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
+    $scope.$parent.clearFabs();
+    $scope.$parent.showHeader();
+    ionicMaterialInk.displayEffect();
 
-   // Form
-   $scope.task = {author: "Lucas Tettamanti"}; // TODO user from login
+    // Form
+    $scope.task = {author: "Lucas Tettamanti"}; // TODO user from login
 
-   $scope.done = function() {
-     console.log("DONE");
+    $scope.done = function() {
       DataService.newTask($rootScope.currentColumn, $scope.task);
       $state.go('app.column', {column: $rootScope.currentColumn});
-   };
-   $scope.cancel = function() {
-     console.log("cancel");
+    };
+    $scope.cancel = function() {
       $state.go('app.column', {column: $rootScope.currentColumn});
-   };
-})
+    };
+  })
+
+  .controller('UpdateCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
+    $scope.$parent.clearFabs();
+    $scope.$parent.showHeader();
+    ionicMaterialInk.displayEffect();
+
+    // Form
+    $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+
+    $scope.done = function() {
+      DataService.updateTask($rootScope.currentColumn, $scope.task);
+      $state.go('app.column', {column: $rootScope.currentColumn});
+    };
+    $scope.cancel = function() {
+      $state.go('app.column', {column: $rootScope.currentColumn});
+    };
+  })
 
 .controller('BacklogCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService, $rootScope) {
    $scope.tasks = DataService.getColumn('backlog');
    $scope.$parent.showHeader();
    $scope.$parent.clearFabs();
    $scope.isExpanded = false;
-   $scope.$parent.setHeaderFab(false);
+   $scope.$parent.setHeaderFab(true);
 
    $rootScope.currentColumn = "backlog";
 
@@ -173,6 +188,20 @@ ionicMaterialInk.displayEffect();
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+    $scope.column = $stateParams.column;
     $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+
+    $scope.updateTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
+    $scope.deleteTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
+    $scope.watchTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
 })
 ;
