@@ -81,43 +81,46 @@ angular.module('starter.services', [])
          });
          return _maxId;
       };
+
+     var _getData = function() {
+        return JSON.parse(localStorage.getItem('data'));
+     };
+
+     var _setData = function(data) {
+        localStorage.setItem('data', JSON.stringify(data));
+     };
+
+     var _getFromCache = function() {
+        var res = _getData();
+        if(!res) {
+           _setData(_data);
+           res = _data;
+        }
+        return res;
+     };
+
       return {
          getColumn: function(column) {
-            return _data[column];
+            return _getFromCache()[column];
          },
          all: function() {
-            return _data;
-         },
-         getTasksByTab: function(tab) {
-            return this.all()[tab];
+            return _getFromCache();
          },
          newTask: function(column, data) {
             if(_maxId) _maxId = _getMaxId();
             data.id = _maxId++;
-            _data[column].push(data);
+            var all = this.all();
+            all[column].push(data);
+            _setData(all);
          },
          getTaskById: function(taskId, column) {
             var res = null;
-            _data[column].forEach(function(v) {
+            this.getColumn(column).forEach(function(v) {
                if(parseInt(taskId) === v.id) {
                   res = v;
                }
             });
             return res;
-         },
-         updateTask: function(data, tab) {
-            tab = tab || "todo"; //TODO if tab is undefined, iterate over object to find task id
-            var tabArr = this.getTasksByTab(tab);
-            var tabArrLen = tabArr.length;
-            for(var i = tabArrLen; i--;) {
-               if(tabArr[i].id === parseInt(data.id)) {
-                  tabArr[i] = data;
-               }
-            }
-         },
-         removeTask: function(taskId, tab) {
-            tab = tab || "todo"; //TODO if tab is undefined, iterate over object to find task id
-            this.getTasksByTab.splice(this.getTasksByTab(tab).indexOf(taskId), 1);
          }
       }
    });
