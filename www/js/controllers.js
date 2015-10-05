@@ -103,18 +103,18 @@ angular.module('starter.controllers', [])
 .controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
    $scope.$parent.showHeader();
    $scope.$parent.setHeaderFab('left');
-
-   ionicMaterialMotion.fadeSlideInRight();
    ionicMaterialInk.displayEffect();
 
    // Form
    $scope.task = {author: "Lucas Tettamanti"}; // TODO user from login
 
    $scope.done = function() {
+     console.log("DONE");
       DataService.newTask($rootScope.currentColumn, $scope.task);
       $state.go('app.column', {column: $rootScope.currentColumn});
    };
    $scope.cancel = function() {
+     console.log("cancel");
       $state.go('app.column', {column: $rootScope.currentColumn});
    };
 })
@@ -174,17 +174,5 @@ ionicMaterialInk.displayEffect();
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
     $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
-
-
-    // Activate ink for controller
-    //ionicMaterialInk.displayEffect();
-
-    //ionicMaterialMotion.pushDown({
-    //    selector: '.push-down'
-    //});
-    //ionicMaterialMotion.fadeSlideInRight({
-    //    selector: '.animate-fade-slide-in .item'
-    //});
 })
-
 ;
