@@ -20,7 +20,7 @@
         </div>
         <h4 class="content padding double-padding-x">Backlog</h4>
         <div class="list animate-fade-slide-in-right" ng-repeat="task in tasks">
-            <a ui-sref="app.column" class="item item-avatar item-icon-right">
+            <a ui-sref="app.task({taskId: task.id, column: 'backlog'})" class="item item-avatar item-icon-right">
                 <img src="img/backlog.png">
                 <h2>{{task.title}}</h2>
                 <p>{{task.content}}</p>
