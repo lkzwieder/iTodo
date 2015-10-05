@@ -35,9 +35,9 @@ p {
 }
 
 .menu h2 {
-    bottom: 0;
+    top: 10px;
     font-size: 18px;
-    left: 16px;
+    right: 20px;
     position: absolute;
 }
 

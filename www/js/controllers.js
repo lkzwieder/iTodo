@@ -190,5 +190,18 @@ ionicMaterialInk.displayEffect();
     $scope.$parent.setHeaderFab(false);
     $scope.column = $stateParams.column;
     $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+
+    $scope.updateTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
+    $scope.deleteTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
+    $scope.watchTask = function(taskId, column) {
+      console.log(arguments);
+      return;
+    };
 })
 ;
