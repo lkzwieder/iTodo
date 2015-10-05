@@ -3,19 +3,25 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
-    // Form data for the login modal
-    $scope.loginData = {};
-    $scope.isExpanded = false;
-    $scope.hasHeaderFabLeft = false;
-    $scope.hasHeaderFabRight = false;
+.controller('AppCtrl', function($scope, $state, $rootScope, $ionicModal, $ionicPopover, $timeout) {
+   // Form data for the login modal
+   $scope.loginData = {};
+   $scope.isExpanded = false;
+   $scope.hasHeaderFabLeft = false;
+   $scope.hasHeaderFabRight = false;
 
-    var navIcons = document.getElementsByClassName('ion-navicon');
-    for (var i = 0; i < navIcons.length; i++) {
-        navIcons.addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
-    }
+   var navIcons = document.getElementsByClassName('ion-navicon');
+   for (var i = 0; i < navIcons.length; i++) {
+     navIcons.addEventListener('click', function() {
+         this.classList.toggle('active');
+     });
+   }
+
+   $rootScope.currentColumn = "backlog";
+
+   $scope.createNewTask = function() {
+      $state.go('app.new');
+   };
 
     ////////////////////////////////////////
     // Layout Methods
@@ -66,7 +72,6 @@ angular.module('starter.controllers', [])
                 content[i].classList.toggle('has-header');
             }
         }
-
     };
 
     $scope.hideHeader = function() {
@@ -95,37 +100,33 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
+.controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
+   $scope.$parent.showHeader();
+   $scope.$parent.setHeaderFab('left');
 
-    // Delay expansion
-    $timeout(function() {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
+   ionicMaterialMotion.fadeSlideInRight();
+   ionicMaterialInk.displayEffect();
 
-    // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
+   // Form
+   $scope.task = {author: "Lucas Tettamanti"}; // TODO user from login
 
-    // Set Ink
-    ionicMaterialInk.displayEffect();
+   $scope.done = function() {
+      DataService.newTask($rootScope.currentColumn, $scope.task);
+      $state.go('app.column', {column: $rootScope.currentColumn});
+   };
+   $scope.cancel = function() {
+      $state.go('app.column', {column: $rootScope.currentColumn});
+   };
 })
 
-.controller('BacklogCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService) {
-    // Set Header
-    $scope.tasks = DataService.getBacklog();
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
+.controller('BacklogCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService, $rootScope) {
+   $scope.tasks = DataService.getColumn('backlog');
+   $scope.$parent.showHeader();
+   $scope.$parent.clearFabs();
+   $scope.isExpanded = false;
+   $scope.$parent.setHeaderFab(false);
 
-    $scope.createNewTask = function() {
-
-    };
+   $rootScope.currentColumn = "backlog";
 
     // Set Motion
     $timeout(function() {
@@ -144,40 +145,46 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab('right');
+.controller('ColumnCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, DataService, $rootScope) {
+   $scope.column = $stateParams.column;
+   $rootScope.currentColumn = $stateParams.column;
+   $scope.tasks = DataService.getColumn($stateParams.column);
+   $scope.image = 'img/bug.png';
 
-    $timeout(function() {
-        ionicMaterialMotion.fadeSlideIn({
-            selector: '.animate-fade-slide-in .item'
-        });
-    }, 200);
+   $scope.$parent.showHeader();
+   $scope.$parent.clearFabs();
+   $scope.isExpanded = true;
+   $scope.$parent.setExpanded(false);
+   $scope.$parent.setHeaderFab('right');
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
+   $timeout(function() {
+     ionicMaterialMotion.fadeSlideIn({
+         selector: '.animate-fade-slide-in .item'
+     });
+   }, 200);
+
+   // Activate ink for controller
+ionicMaterialInk.displayEffect();
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+    $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+
 
     // Activate ink for controller
-    ionicMaterialInk.displayEffect();
+    //ionicMaterialInk.displayEffect();
 
-    ionicMaterialMotion.pushDown({
-        selector: '.push-down'
-    });
-    ionicMaterialMotion.fadeSlideInRight({
-        selector: '.animate-fade-slide-in .item'
-    });
-
+    //ionicMaterialMotion.pushDown({
+    //    selector: '.push-down'
+    //});
+    //ionicMaterialMotion.fadeSlideInRight({
+    //    selector: '.animate-fade-slide-in .item'
+    //});
 })
 
 ;

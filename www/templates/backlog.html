@@ -1,26 +1,26 @@
-<ion-view view-title="Profile">
+<ion-view view-title="Home">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('img/profile-bg.jpg');">
             <div class="content">
-                <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div>
+                <div class="avatar" style="background-image: url('img/ltettamanti.jpeg');"></div>
                 <h3><a class="light">Lucas Tettamanti</a></h3>
                 <h4>Mobile developer?</h4>
             </div>
         </div>
         <div class="tabs tabs-dark tabs-icon-top static">
-            <a ui-sref="app.activity" class="tab-item">
+            <a ui-sref="app.column({column: 'todo'})" class="tab-item">
                 <i class="icon ion-arrow-graph-up-right"></i> To Do
             </a>
-            <a ui-sref="app.friends" class="tab-item">
+            <a ui-sref="app.column({column: 'inProgress'})" class="tab-item">
                 <i class="icon ion-android-people"></i> In Progress
             </a>
-            <a ui-sref="app.gallery" class="tab-item">
+            <a ui-sref="app.column({column: 'done'})" class="tab-item">
                 <i class="icon ion-images"></i> Done
             </a>
         </div>
         <h4 class="content padding double-padding-x">Backlog</h4>
         <div class="list animate-fade-slide-in-right" ng-repeat="task in tasks">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+            <a ui-sref="app.task({taskId: task.id, column: 'backlog'})" class="item item-avatar item-icon-right">
                 <img src="img/backlog.png">
                 <h2>{{task.title}}</h2>
                 <p>{{task.content}}</p>

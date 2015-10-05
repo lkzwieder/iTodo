@@ -5,14 +5,16 @@ angular.module('starter.services', [])
             id: 10,
             title: "Fix helper",
             content: "Clearly the helper is broken",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }, {
             id: 11,
             title: "Refactoring TODO app",
             content: "Im wasting time with CSS",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }],
@@ -20,36 +22,41 @@ angular.module('starter.services', [])
             id: 0,
             title: "fist issue",
             content: "some content here",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }, {
             id: 1,
             title: "second issue",
             content: "some content here",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }, {
             id: 2,
             title: "third issue",
-            content: "some content here",
-            deadline: "",
+            content: "some content heresome content heresome content heresome content heresome content heresome content heresome content heresome content here",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }],
-         inprogress: [{
+         inProgress: [{
             id: 3,
             title: "forth issue",
             content: "some content here",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }, {
             id: 4,
             title: "fifth issue",
             content: "some content here",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }],
@@ -57,14 +64,27 @@ angular.module('starter.services', [])
             id: 5,
             title: "sixth issue",
             content: "some content here",
-            deadline: "",
+            deadline: "10/10/2015",
+            type: "bug",
             author: "Lucas Tettamanti",
             asigned: "Jonathan"
          }]
       };
+
+      var _maxId = false;
+      var _getMaxId = function() {
+         var maxId = 0;
+         angular.forEach(_data, function(column) {
+            var cLen = column.length;
+            for(var i = cLen; i--;) {
+               if(column[i].id > maxId) maxId = column[i].id;
+            }
+         });
+         return _getMaxId();
+      };
       return {
-         getBacklog: function() {
-            return _data['backlog'];
+         getColumn: function(column) {
+            return _data[column];
          },
          all: function() {
             return _data;
@@ -72,20 +92,19 @@ angular.module('starter.services', [])
          getTasksByTab: function(tab) {
             return this.all()[tab];
          },
-         getTaskById: function(taskId, tab) {
-            tab = tab || "todo";
-            var tabArr = this.getTasksByTab(tab);
-            var tabArrLen = tabArr.length;
-            for(var i = tabArrLen; i--;) {
-               if(tabArr[i].id === parseInt(taskId)) {
-                  return tabArr[i];
-               }
-            }
-            return null;
+         newTask: function(column, data) {
+            if(_maxId) _maxId = _getMaxId();
+            data.id = _maxId++;
+            _data[column].push(data);
          },
-         addTask: function(data, tab) {
-            tab = tab || "todo";
-            this.getTasksByTab(tab).push(data);
+         getTaskById: function(taskId, column) {
+            var res = null;
+            _data[column].forEach(function(v) {
+               if(parseInt(taskId) === v.id) {
+                  res = v;
+               }
+            });
+            return res;
          },
          updateTask: function(data, tab) {
             tab = tab || "todo"; //TODO if tab is undefined, iterate over object to find task id

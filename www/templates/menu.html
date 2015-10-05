@@ -18,20 +18,20 @@
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
             <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.activity">
-                    Activity
-                </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.login">
                     Login
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.backlog">
+                <ion-item nav-clear menu-close ui-sref="app.column({column: 'backlog'})">
                     Backlog
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.friends">
-                    Friends
+                <ion-item nav-clear menu-close ui-sref="app.column({column: 'todo'})">
+                    Todo
                 </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.gallery">
-                    Gallery
+                <ion-item nav-clear menu-close ui-sref="app.column({column: 'inProgress'})">
+                    In Progress
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.column({column: 'done'})">
+                    Done
                 </ion-item>
             </ion-list>
         </ion-content>
