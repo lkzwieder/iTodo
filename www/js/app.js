@@ -92,10 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             }
-        },
-      'fabContent': {
-          template: ''
-      }
+        }
     })
 
     .state('app.backlog', {

@@ -121,6 +121,9 @@ angular.module('starter.services', [])
                }
             });
             return res;
+         },
+         updateTask: function(taskId, column) {
+            console.log(arguments);
          }
       }
    });
