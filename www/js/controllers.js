@@ -102,7 +102,7 @@ angular.module('starter.controllers', [])
 
 .controller('NewCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $rootScope, $state) {
    $scope.$parent.showHeader();
-   //$scope.$parent.setHeaderFab('left');
+   $scope.$parent.setHeaderFab('left');
 
    ionicMaterialMotion.fadeSlideInRight();
    ionicMaterialInk.displayEffect();
@@ -167,23 +167,24 @@ angular.module('starter.controllers', [])
 ionicMaterialInk.displayEffect();
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+    $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+
 
     // Activate ink for controller
-    ionicMaterialInk.displayEffect();
+    //ionicMaterialInk.displayEffect();
 
-    ionicMaterialMotion.pushDown({
-        selector: '.push-down'
-    });
-    ionicMaterialMotion.fadeSlideInRight({
-        selector: '.animate-fade-slide-in .item'
-    });
-
+    //ionicMaterialMotion.pushDown({
+    //    selector: '.push-down'
+    //});
+    //ionicMaterialMotion.fadeSlideInRight({
+    //    selector: '.animate-fade-slide-in .item'
+    //});
 })
 
 ;

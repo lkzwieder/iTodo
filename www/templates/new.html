@@ -1,26 +1,28 @@
 <ion-view view-title="New">
-    <div id="newTask" class="list">
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Title</span>
-            <input type="text" placeholder="My issue title" name="task.title" ng-model="task.title">
-        </label>
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Description</span>
-            <input type="text" placeholder="Refactor todo app!" name="task.content" ng-model="task.content">
-        </label>
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Deadline</span>
-            <input type="text" placeholder="10/10/2016" name="task.deadline" ng-model="task.deadline">
-        </label>
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Type</span>
-            <input type="text" placeholder="bug" name="task.type" ng-model="task.type">
-        </label>
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Assigned</span>
-            <input type="text" placeholder="Jonathan" name="task.assigned" ng-model="task.assigned">
-        </label>
-        <button class="button icon-left button-outline button-stable ion-android-cancel" ng-click="cancel()">Cancel</button>
-        <button class="button icon-right button-positive ion-android-done" ng-click="done()">Done</button>
-    </div>
+    <ion-content>
+        <div id="newTask" class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Title</span>
+                <input type="text" placeholder="My issue title" name="task.title" ng-model="task.title">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Description</span>
+                <input type="text" placeholder="Refactor todo app!" name="task.content" ng-model="task.content">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Deadline</span>
+                <input type="text" placeholder="10/10/2016" name="task.deadline" ng-model="task.deadline">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Type</span>
+                <input type="text" placeholder="bug" name="task.type" ng-model="task.type">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Assigned</span>
+                <input type="text" placeholder="Jonathan" name="task.assigned" ng-model="task.assigned">
+            </label>
+            <button class="button icon-left button-outline button-stable ion-android-cancel" ng-click="cancel()">Cancel</button>
+            <button class="button icon-right button-positive ion-android-done" ng-click="done()">Done</button>
+        </div>
+    <ion-content>
 </ion-view>

@@ -97,6 +97,15 @@ angular.module('starter.services', [])
             data.id = _maxId++;
             _data[column].push(data);
          },
+         getTaskById: function(taskId, column) {
+            var res = null;
+            _data[column].forEach(function(v) {
+               if(parseInt(taskId) === v.id) {
+                  res = v;
+               }
+            });
+            return res;
+         },
          updateTask: function(data, tab) {
             tab = tab || "todo"; //TODO if tab is undefined, iterate over object to find task id
             var tabArr = this.getTasksByTab(tab);

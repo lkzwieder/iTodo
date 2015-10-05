@@ -55,14 +55,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.new', {
-        url: '/new',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/new.html',
-                controller: 'NewCtrl'
-            }
-        }
+      .state('app.new', {
+          url: '/new',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/new.html',
+                  controller: 'NewCtrl'
+              }
+          }
+      })
+
+    .state('app.task', {
+      url: '/task/:taskId/:column',
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/task.html',
+              controller: 'TaskCtrl'
+          }
+      }
     })
 
     .state('app.login', {

@@ -1,7 +1,7 @@
 <ion-view view-title="{{column | uppercase}}">
     <ion-content class="animate-fade-slide-in">
         <div class="item card-item" ng-repeat="task in tasks">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.task({taskId: task.id, column: column})" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url({{image}});"></span>
                     <strong>{{task.title | uppercase}}</strong>
