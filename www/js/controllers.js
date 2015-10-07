@@ -196,8 +196,6 @@ ionicMaterialInk.displayEffect();
 
     $scope.updateTask = function(taskId, column) {
       $state.go('app.update', {taskId: taskId, column: column, data: $scope.task});
-      console.log(arguments, $scope.task);
-      return;
     };
     $scope.deleteTask = function(taskId, column) {
       console.log(arguments);
