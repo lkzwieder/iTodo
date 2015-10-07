@@ -132,6 +132,11 @@ angular.module('starter.services', [])
             var d = _getFromCache();
             d[column][_getTaskPosition(data.id, column)] = data;
             _setData(d);
+         },
+         deleteTask: function(taskId, column) {
+            var all = this.all();
+            all[column].splice(_getTaskPosition(taskId, column), 1);
+            _setData(all);
          }
       }
    });

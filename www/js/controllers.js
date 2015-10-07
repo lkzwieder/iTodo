@@ -185,7 +185,7 @@ angular.module('starter.controllers', [])
 ionicMaterialInk.displayEffect();
 })
 
-.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $state) {
+.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $state, $rootScope) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
@@ -198,8 +198,8 @@ ionicMaterialInk.displayEffect();
       $state.go('app.update', {taskId: taskId, column: column, data: $scope.task});
     };
     $scope.deleteTask = function(taskId, column) {
-      console.log(arguments);
-      return;
+      DataService.deleteTask(taskId, column);
+      $state.go('app.column', {column: $rootScope.currentColumn});
     };
     $scope.watchTask = function(taskId, column) {
       console.log(arguments);
