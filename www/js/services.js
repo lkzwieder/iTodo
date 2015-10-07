@@ -99,10 +99,22 @@ angular.module('starter.services', [])
         return res;
      };
 
+     var _getColumn = function(column) {
+        return _getFromCache()[column];
+     };
+
+     var _getTaskPosition = function(taskId, column) {
+        var res = null;
+        _getColumn(column).forEach(function(v, i) {
+           if(parseInt(taskId) === v.id) {
+              res = i;
+           }
+        });
+        return res;
+     };
+
       return {
-         getColumn: function(column) {
-            return _getFromCache()[column];
-         },
+         getColumn: _getColumn,
          all: function() {
             return _getFromCache();
          },
@@ -114,16 +126,19 @@ angular.module('starter.services', [])
             _setData(all);
          },
          getTaskById: function(taskId, column) {
-            var res = null;
-            this.getColumn(column).forEach(function(v) {
-               if(parseInt(taskId) === v.id) {
-                  res = v;
-               }
-            });
-            return res;
+            return this.getColumn(column)[_getTaskPosition(taskId, column)];
          },
-         updateTask: function(taskId, column) {
-            console.log(arguments);
+         updateTask: function(column, data) {
+            var d = _getFromCache();
+            d[column][_getTaskPosition(data.id, column)] = data;
+            _setData(d);
+         },
+         deleteTask: function(taskId, column) {
+            var all = this.all();
+            all[column].splice(_getTaskPosition(taskId, column), 1);
+            _setData(all);
          }
       }
    });
+
+// TODO implement memoize in getColumn, etc.

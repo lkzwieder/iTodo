@@ -106,6 +106,7 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 
     // Form
+    $scope.title = 'New';
     $scope.task = {author: "Lucas Tettamanti"}; // TODO user from login
 
     $scope.done = function() {
@@ -122,11 +123,13 @@ angular.module('starter.controllers', [])
     $scope.$parent.showHeader();
     ionicMaterialInk.displayEffect();
 
+    $scope.title = "Update";
     // Form
     $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
+    $scope.status = $rootScope.currentColumn;
 
     $scope.done = function() {
-      DataService.updateTask($rootScope.currentColumn, $scope.task);
+      DataService.updateTask($scope.status, $scope.task);
       $state.go('app.column', {column: $rootScope.currentColumn});
     };
     $scope.cancel = function() {
@@ -182,7 +185,7 @@ angular.module('starter.controllers', [])
 ionicMaterialInk.displayEffect();
 })
 
-.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService) {
+.controller('TaskCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, DataService, $state, $rootScope) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
@@ -192,12 +195,11 @@ ionicMaterialInk.displayEffect();
     $scope.task = DataService.getTaskById($stateParams.taskId, $stateParams.column);
 
     $scope.updateTask = function(taskId, column) {
-      console.log(arguments);
-      return;
+      $state.go('app.update', {taskId: taskId, column: column, data: $scope.task});
     };
     $scope.deleteTask = function(taskId, column) {
-      console.log(arguments);
-      return;
+      DataService.deleteTask(taskId, column);
+      $state.go('app.column', {column: $rootScope.currentColumn});
     };
     $scope.watchTask = function(taskId, column) {
       console.log(arguments);

@@ -1,4 +1,4 @@
-<ion-view view-title="New">
+<ion-view view-title="{{title}}">
     <ion-content>
         <div id="newTask" class="list">
             <label class="item item-input item-stacked-label">
@@ -20,6 +20,10 @@
             <label class="item item-input item-stacked-label">
                 <span class="input-label">Assigned</span>
                 <input type="text" placeholder="Jonathan" name="task.assigned" ng-model="task.assigned">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Status</span>
+                <input type="text" placeholder="Jonathan" name="status" ng-model="status">
             </label>
             <button class="button icon-left button-outline button-stable ion-android-cancel" ng-click="cancel()">Cancel</button>
             <button class="button icon-right button-positive ion-android-done" ng-click="done()">Done</button>
