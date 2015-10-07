@@ -100,14 +100,15 @@ angular.module('starter.services', [])
      };
 
      var _getColumn = function(column) {
+        var x = _getFromCache();
         return _getFromCache()[column];
      };
 
      var _getTaskPosition = function(taskId, column) {
         var res = null;
-        _getColumn(column).forEach(function(v) {
+        _getColumn(column).forEach(function(v, i) {
            if(parseInt(taskId) === v.id) {
-              res = v.id;
+              res = i;
            }
         });
         return res;
@@ -126,6 +127,7 @@ angular.module('starter.services', [])
             _setData(all);
          },
          getTaskById: function(taskId, column) {
+            console.log(_getTaskPosition(taskId, column));
             return this.getColumn(column)[_getTaskPosition(taskId, column)];
          },
          updateTask: function(column, data) {
