@@ -100,7 +100,6 @@ angular.module('starter.services', [])
      };
 
      var _getColumn = function(column) {
-        var x = _getFromCache();
         return _getFromCache()[column];
      };
 
@@ -127,7 +126,6 @@ angular.module('starter.services', [])
             _setData(all);
          },
          getTaskById: function(taskId, column) {
-            console.log(_getTaskPosition(taskId, column));
             return this.getColumn(column)[_getTaskPosition(taskId, column)];
          },
          updateTask: function(column, data) {
